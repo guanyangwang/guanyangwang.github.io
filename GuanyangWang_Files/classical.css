@@ -333,6 +333,11 @@ td {
     font-style: italic;
 }
 
+/* Chinese text sizing */
+.zh {
+    font-size: 0.85em;
+}
+
 /* Print styles */
 @media print {
     #layout-menu { 
