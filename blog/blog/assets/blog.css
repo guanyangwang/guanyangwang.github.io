@@ -1,0 +1,212 @@
+/* Blog-specific structure; typography intentionally inherits classical.css. */
+
+.article-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #000000;
+    text-align: center;
+}
+
+.article-header h1 {
+    margin: 0 0 0.5em;
+    font-size: 28px;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.article-kicker,
+.article-meta {
+    margin: 0 0 8px;
+    color: #666666;
+    text-align: center;
+}
+
+.article-kicker {
+    font-size: 16px;
+}
+
+.article-meta {
+    font-size: 16px;
+}
+
+.article-tldr {
+    margin: 20px 0;
+}
+
+.article-tldr h2 {
+    margin: 0 0 8px;
+    padding: 0;
+    border: none;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.article-tldr p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.article-separator {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #cccccc;
+}
+
+.language-link {
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+.article-toc {
+    margin: 20px 0 30px;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border: 1px solid #dddddd;
+}
+
+.article-toc h2 {
+    margin: 0 0 10px;
+    padding: 0 0 3px;
+    font-size: 18px;
+}
+
+.article-toc ul {
+    margin: 0;
+    padding-left: 30px;
+}
+
+.article-toc li {
+    margin-bottom: 0.35em;
+    font-size: 17px;
+}
+
+.article-content {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.article-content p {
+    line-height: inherit;
+}
+
+.article-content h2 {
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.article-content h3 {
+    font-size: 19px;
+    line-height: 1.45;
+}
+
+.article-content h3 + p {
+    margin-top: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.article-content blockquote {
+    margin: 1.5em 0;
+    padding: 12px 18px;
+    background: #f9f9f9;
+    border-left: 3px solid #cccccc;
+}
+
+.article-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.article-content a,
+.article-content code {
+    overflow-wrap: anywhere;
+}
+
+.article-content code {
+    font-size: 0.9em;
+}
+
+.blog-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid #cccccc;
+}
+
+.post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.post-list li {
+    margin: 0;
+    padding: 28px 0;
+    border-top: 1px solid #cccccc;
+}
+
+.post-list li:last-child {
+    border-bottom: 1px solid #cccccc;
+}
+
+.post-list h2 {
+    margin: 0 0 8px;
+    padding: 0;
+    border: none;
+    font-size: 21px;
+    line-height: 1.4;
+}
+
+.post-list p {
+    margin: 8px 0 0;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.post-date {
+    color: #666666;
+    font-size: 16px !important;
+}
+
+.post-language {
+    margin-top: 10px !important;
+    font-size: 16px !important;
+}
+
+@media (max-width: 768px) {
+    .article-header h1 {
+        font-size: 26px;
+    }
+
+    .article-content {
+        font-size: 18px;
+    }
+
+    .article-content h2 {
+        font-size: 21px;
+    }
+
+    .article-content h3 {
+        font-size: 19px;
+    }
+
+    .article-toc {
+        padding: 12px 15px;
+    }
+
+    .post-list h2 {
+        font-size: 20px;
+    }
+
+    .post-list p {
+        font-size: 18px;
+    }
+}
+
+@media print {
+    .article-toc,
+    .blog-footer {
+        display: none;
+    }
+}
