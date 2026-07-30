@@ -29,6 +29,30 @@
     font-size: 16px;
 }
 
+.article-tldr {
+    margin: 20px 0;
+}
+
+.article-tldr h2 {
+    margin: 0 0 8px;
+    padding: 0;
+    border: none;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.article-tldr p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.article-separator {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #cccccc;
+}
+
 .language-link {
     white-space: nowrap;
     font-weight: normal;

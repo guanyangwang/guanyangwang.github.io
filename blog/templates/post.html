@@ -36,6 +36,13 @@ $endif$
                 <h1>$title$</h1>
                 <p class="article-meta"><time datetime="$date$">$date$</time><span aria-hidden="true"> · </span>$author$$if(alternate_url)$<span aria-hidden="true"> · </span><a class="language-link" href="$alternate_url$" lang="$alternate_lang$" hreflang="$alternate_lang$">$alternate_label$</a>$endif$</p>
             </header>
+$if(tldr)$
+            <section class="article-tldr" aria-labelledby="article-tldr-heading">
+                <h2 id="article-tldr-heading">TL;DR</h2>
+                <p>$tldr$</p>
+            </section>
+            <hr class="article-separator">
+$endif$
 $if(toc)$
             <nav class="article-toc" aria-label="$toc_title$">
                 <h2>$toc_title$</h2>

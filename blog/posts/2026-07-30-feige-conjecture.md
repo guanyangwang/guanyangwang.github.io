@@ -21,7 +21,7 @@ Together with several longtime friends, we have posted a paper resolving [Feige�
 
 Unlike with my previous proof of the [Kannan–Tetali–Vempala conjecture](./llm-ktv-lean.html), I did not prompt the answer myself; all my tokens were going toward a NeurIPS rebuttal 😑. My friend Zhengqing Zhou obtained the answer, and the rest of us worked together to check, rewrite, formalize, and turn it into a paper.
 
-I did not know the exact prompt Zhengqing used, but he told me it was very simple. After seeing the proof, but before the paper appeared on arXiv, I realized I had a rare opportunity to run a controlled experiment on prompting and see how difficult the proof was to reproduce. I had a high-quality private test case: I knew that a simple prompt could produce a one-shot proof, but the proof was not yet on the internet.
+After seeing the proof, but before the paper appeared on arXiv, I realized I had a rare opportunity to run a controlled experiment on prompting and see how difficult the proof was to reproduce. I had a high-quality private test case: I knew that a simple prompt could produce a proof, but the proof was not yet available online, so success depended only on the prompting.
 
 I used two prompts that differed by only one sentence:
 
