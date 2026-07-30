@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="How GPT-5.5 Pro generated a proof resolving the binary-matrix case of a 1997 conjecture—and why pairing LLM proof generation with Lean verification may become a common mathematical workflow.">
+    <meta name="description" content="How GPT-5.5 Pro generated a proof
+resolving the binary-matrix case of a 1997 conjecture—and why pairing
+LLM proof generation with Lean verification may become a common
+mathematical workflow.">
     <meta name="author" content="Guanyang Wang">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="LLMs for Proof Generation and Verification">
-    <meta property="og:description" content="How GPT-5.5 Pro generated a proof resolving the binary-matrix case of a 1997 conjecture—and why pairing LLM proof generation with Lean verification may become a common mathematical workflow.">
+    <meta property="og:title" content="LLMs for Proof Generation and
+Verification">
+    <meta property="og:description" content="How GPT-5.5 Pro generated a
+proof resolving the binary-matrix case of a 1997 conjecture—and why
+pairing LLM proof generation with Lean verification may become a common
+mathematical workflow.">
     <link rel="alternate" hreflang="zh-CN" href="llm-ktv-lean-zh.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../GuanyangWang_Files/classical.css" type="text/css">
     <link rel="stylesheet" href="./assets/blog.css" type="text/css">
-    <title>LLMs for Proof Generation and Verification - Guanyang Wang</title>
+    <title>LLMs for Proof Generation and
+Verification - Guanyang Wang</title>
 </head>
 <body class="blog-page">
 <div class="page-container">
@@ -32,98 +40,319 @@
             <header class="article-header">
                 <p class="article-kicker"><a href="index.html">Blog</a></p>
                 <h1>LLMs for Proof Generation and Verification</h1>
-                <p class="article-meta"><time datetime="2026-07-13">2026-07-13</time><span aria-hidden="true"> · </span>Guanyang Wang<span aria-hidden="true"> · </span><a class="language-link" href="llm-ktv-lean-zh.html" lang="zh-CN" hreflang="zh-CN">中文</a></p>
+                <p class="article-meta"><time datetime="2026-07-13">2026-07-13</time><span aria-hidden="true"> · </span>Guanyang
+Wang<span aria-hidden="true"> · </span><a class="language-link" href="llm-ktv-lean-zh.html" lang="zh-CN" hreflang="zh-CN">中文</a></p>
             </header>
             <nav class="article-toc" aria-label="Contents">
                 <h2>Contents</h2>
 <ul>
-<li><a href="#links-and-materials" id="toc-links-and-materials">Links and Materials</a></li>
-<li><a href="#other-recent-cases" id="toc-other-recent-cases">Other Recent Cases</a></li>
-<li><a href="#how-the-proof-was-found" id="toc-how-the-proof-was-found">How the Proof Was Found</a></li>
-<li><a href="#from-the-proof-to-lean" id="toc-from-the-proof-to-lean">From the Proof to Lean</a></li>
+<li><a href="#links-and-materials" id="toc-links-and-materials">Links
+and Materials</a></li>
+<li><a href="#other-recent-cases" id="toc-other-recent-cases">Other
+Recent Cases</a></li>
+<li><a href="#how-the-proof-was-found"
+id="toc-how-the-proof-was-found">How the Proof Was Found</a></li>
+<li><a href="#from-the-proof-to-lean"
+id="toc-from-the-proof-to-lean">From the Proof to Lean</a></li>
 <li><a href="#faq" id="toc-faq">FAQ</a>
 <ul>
-<li><a href="#1-why-formalize-the-proof-in-lean" id="toc-1-why-formalize-the-proof-in-lean">1. Why formalize the proof in Lean?</a></li>
-<li><a href="#2-what-kinds-of-conjectures-can-llms-solve" id="toc-2-what-kinds-of-conjectures-can-llms-solve">2. What kinds of conjectures can LLMs solve?</a></li>
-<li><a href="#3-how-many-attempts-did-this-take" id="toc-3-how-many-attempts-did-this-take">3. How many attempts did this take?</a></li>
-<li><a href="#4-what-might-this-mean-for-mathematics" id="toc-4-what-might-this-mean-for-mathematics">4. What might this mean for mathematics?</a></li>
-<li><a href="#5-what-might-this-mean-for-mathematicians" id="toc-5-what-might-this-mean-for-mathematicians">5. What might this mean for mathematicians?</a></li>
-<li><a href="#6-what-are-the-main-takeaways" id="toc-6-what-are-the-main-takeaways">6. What are the main takeaways?</a></li>
+<li><a href="#why-formalize-the-proof-in-lean"
+id="toc-why-formalize-the-proof-in-lean">1. Why formalize the proof in
+Lean?</a></li>
+<li><a href="#what-kinds-of-conjectures-can-llms-solve"
+id="toc-what-kinds-of-conjectures-can-llms-solve">2. What kinds of
+conjectures can LLMs solve?</a></li>
+<li><a href="#how-many-attempts-did-this-take"
+id="toc-how-many-attempts-did-this-take">3. How many attempts did this
+take?</a></li>
+<li><a href="#what-might-this-mean-for-mathematics"
+id="toc-what-might-this-mean-for-mathematics">4. What might this mean
+for mathematics?</a></li>
+<li><a href="#what-might-this-mean-for-mathematicians"
+id="toc-what-might-this-mean-for-mathematicians">5. What might this mean
+for mathematicians?</a></li>
+<li><a href="#what-are-the-main-takeaways"
+id="toc-what-are-the-main-takeaways">6. What are the main
+takeaways?</a></li>
 </ul></li>
 </ul>
             </nav>
             <div class="article-content">
-<p>In June 2026, I used <a href="https://openai.com/index/introducing-gpt-5-5/">ChatGPT 5.5 Pro</a> to obtain a proof of the <a href="https://dl.acm.org/doi/10.5555/314161.314256">Kannan–Tetali–Vempala (KTV) conjecture</a>. My collaborators, Weibo Fu and Qian Qin, and I then checked it carefully. Afterward, I used <a href="https://openai.com/codex/">Codex</a> to formalize the proof in <a href="https://lean-lang.org/">Lean</a>.</p>
-<p>The theorem matters in its own right. Posed in 1997, the KTV conjecture asks whether the swap chain mixes rapidly for every feasible choice of row and column sums. At its core is a basic sampling problem: drawing a uniformly random binary matrix with prescribed margins, or equivalently a uniformly random bipartite graph with prescribed degrees. The swap chain is a standard sampler for fixed-margin null models in ecology, statistics, and network analysis. <a href="https://arxiv.org/abs/2606.22636">Our theorem</a> resolves the binary-matrix case after nearly three decades: it gives a worst-case optimal spectral-gap bound for every feasible set of margins, a result stronger than the original rapid-mixing conjecture itself.</p>
-<p>Yet what stunned me even more was how the result was obtained and checked. In both proof generation and formalization, LLMs performed far beyond what I had expected.</p>
-<p>I have little doubt that this will change how mathematicians work. I think our experience points toward a workflow that may become common: an LLM generates a proof; humans inspect it, steer the process, and take responsibility for the result; an LLM turns the proof into Lean; and Lean’s kernel checks the formalization. As LLM-generated proofs proliferate, verification may become a bottleneck. Pairing generation with machine-checked formalization offers a plausible way for mathematical discovery and trustworthy verification to scale together.</p>
-<p>That is why I decided to document how we obtained and checked this proof. I wanted to leave a concrete record of how the workflow played out in practice, in the hope that it will be useful to others.</p>
-<p>The proof itself took only a handful of prompting rounds. The Lean formalization took Codex about 100 hours, consumed an entire week of my Pro quota, and initially produced roughly 100,000 lines of code.</p>
+<p>In June 2026, I used <a
+href="https://openai.com/index/introducing-gpt-5-5/">ChatGPT 5.5 Pro</a>
+to obtain a proof of the <a
+href="https://dl.acm.org/doi/10.5555/314161.314256">Kannan–Tetali–Vempala
+(KTV) conjecture</a>. My collaborators, Weibo Fu and Qian Qin, and I
+then checked it carefully. Afterward, I used <a
+href="https://openai.com/codex/">Codex</a> to formalize the proof in <a
+href="https://lean-lang.org/">Lean</a>.</p>
+<p>The theorem matters in its own right. Posed in 1997, the KTV
+conjecture asks whether the swap chain mixes rapidly for every feasible
+choice of row and column sums. At its core is a basic sampling problem:
+drawing a uniformly random binary matrix with prescribed margins, or
+equivalently a uniformly random bipartite graph with prescribed degrees.
+The swap chain is a standard sampler for fixed-margin null models in
+ecology, statistics, and network analysis. <a
+href="https://arxiv.org/abs/2606.22636">Our theorem</a> resolves the
+binary-matrix case after nearly three decades: it gives a worst-case
+optimal spectral-gap bound for every feasible set of margins, a result
+stronger than the original rapid-mixing conjecture itself.</p>
+<p>Yet what stunned me even more was how the result was obtained and
+checked. In both proof generation and formalization, LLMs performed far
+beyond what I had expected.</p>
+<p>I have little doubt that this will change how mathematicians work. I
+think our experience points toward a workflow that may become common: an
+LLM generates a proof; humans inspect it, steer the process, and take
+responsibility for the result; an LLM turns the proof into Lean; and
+Lean’s kernel checks the formalization. As LLM-generated proofs
+proliferate, verification may become a bottleneck. Pairing generation
+with machine-checked formalization offers a plausible way for
+mathematical discovery and trustworthy verification to scale
+together.</p>
+<p>That is why I decided to document how we obtained and checked this
+proof. I wanted to leave a concrete record of how the workflow played
+out in practice, in the hope that it will be useful to others.</p>
+<p>The proof itself took only a handful of prompting rounds. The Lean
+formalization took Codex about 100 hours, consumed an entire week of my
+Pro quota, and initially produced roughly 100,000 lines of code.</p>
 <h2 id="links-and-materials">Links and Materials</h2>
 <ul>
-<li>Paper: <a href="https://arxiv.org/abs/2606.22636">Spectral Gap for the Binary Fixed-Margin Swap Chain</a></li>
-<li>Lean formalization: <a href="https://github.com/guanyangwang/ktv-swap-lean">guanyangwang/ktv-swap-lean</a></li>
-<li>Prompt transcript: <a href="https://chatgpt.com/share/6a37fe0d-f98c-83ea-a481-f16f68e47ddb">Prompt history</a></li>
+<li>Paper: <a href="https://arxiv.org/abs/2606.22636">Spectral Gap for
+the Binary Fixed-Margin Swap Chain</a></li>
+<li>Lean formalization: <a
+href="https://github.com/guanyangwang/ktv-swap-lean">guanyangwang/ktv-swap-lean</a></li>
+<li>Prompt transcript: <a
+href="https://chatgpt.com/share/6a37fe0d-f98c-83ea-a481-f16f68e47ddb">Prompt
+history</a></li>
 <li>Slides: TBA</li>
 </ul>
-<p>This post is not about the mathematics of the proof itself. Readers interested in that should see our <a href="https://arxiv.org/abs/2606.22636">paper</a> and the forthcoming slides.</p>
+<p>This post is not about the mathematics of the proof itself. Readers
+interested in that should see our <a
+href="https://arxiv.org/abs/2606.22636">paper</a> and the forthcoming
+slides.</p>
 <h2 id="other-recent-cases">Other Recent Cases</h2>
-<p>Since completing our project, I have learned about several related efforts by other researchers. I am collecting them here for reference:</p>
+<p>Since completing our project, I have learned about several related
+efforts by other researchers. I am collecting them here for
+reference:</p>
 <ul>
-<li>An internal OpenAI model disproved the Erdős unit-distance conjecture: <a href="https://openai.com/index/model-disproves-discrete-geometry-conjecture/">OpenAI’s announcement</a>, the <a href="https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-proof.pdf">AI-generated proof</a>, <a href="https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-remarks.pdf">remarks by the mathematicians</a>, and an <a href="https://cdn.openai.com/pdf/1625eff6-5ac1-40d8-b1db-5d5cf925de8b/unit-distance-cot.pdf">excerpted and rewritten version of the model’s reasoning trace</a>.</li>
-<li>Xiao Ma reproduced the counterexample construction for the unit-distance conjecture using the public version of GPT-5.5 Pro: <a href="https://chatgpt.com/share/6a0e9e04-8cb0-8332-a4f1-ec68acd2e03e">Prompt history</a>.</li>
-<li>OpenAI released a draft proof of the Cycle Double Cover Conjecture generated by GPT-5.6 Sol Ultra: the <a href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf">proof draft</a>, the <a href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf">prompt</a>, and the <a href="https://x.com/__eknight__/status/2075643450196971805">announcement</a>.</li>
-<li>A team at Peking University developed Rethlas–Archon, a system combining natural-language proof search with Lean formalization: the <a href="https://arxiv.org/abs/2604.03789">paper</a>, <a href="https://github.com/frenzymath/Rethlas">Rethlas</a>, and the <a href="https://github.com/frenzymath/Rethlas_results">Rethlas outputs</a>.</li>
-<li>Binghui Peng, Hantao Yu, Runzhou Tao, Steven Wang, Diyi Liu, and others used a GPT-5.5 Pro prover–verifier pipeline on a collection of open mathematical problems, with Lean formalizations for some of the results: the <a href="https://github.com/Pengbinghui/pipeline-math">pipeline-math project</a>.</li>
+<li>An internal OpenAI model disproved the Erdős unit-distance
+conjecture: <a
+href="https://openai.com/index/model-disproves-discrete-geometry-conjecture/">OpenAI’s
+announcement</a>, the <a
+href="https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-proof.pdf">AI-generated
+proof</a>, <a
+href="https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-remarks.pdf">remarks
+by the mathematicians</a>, and an <a
+href="https://cdn.openai.com/pdf/1625eff6-5ac1-40d8-b1db-5d5cf925de8b/unit-distance-cot.pdf">excerpted
+and rewritten version of the model’s reasoning trace</a>.</li>
+<li>Xiao Ma reproduced the counterexample construction for the
+unit-distance conjecture using the public version of GPT-5.5 Pro: <a
+href="https://chatgpt.com/share/6a0e9e04-8cb0-8332-a4f1-ec68acd2e03e">Prompt
+history</a>.</li>
+<li>OpenAI released a draft proof of the Cycle Double Cover Conjecture
+generated by GPT-5.6 Sol Ultra: the <a
+href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf">proof
+draft</a>, the <a
+href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf">prompt</a>,
+and the <a
+href="https://x.com/__eknight__/status/2075643450196971805">announcement</a>.</li>
+<li>Levent Alpöge announced an explicit three-variable counterexample to
+the general Jacobian conjecture, crediting Claude Fable 5 with the
+construction: the <a
+href="https://x.com/__alpoge__/status/2079028340955197566">announcement</a>
+and an <a
+href="https://isa-afp.org/entries/Jacobian_Counterexample.html">independent
+Isabelle/HOL verification</a>.</li>
+<li>ChatGPT 5.6 Pro found the initial proof of our sharp small-deviation
+inequality, which resolves Feige’s (1/e) conjecture: the <a
+href="https://arxiv.org/abs/2607.23980">paper</a>, <a
+href="https://github.com/pengzhang91/Feige">Lean formalization</a>, and
+<a href="./feige-conjecture.html">blog post</a>. Two other preprints
+appeared independently on the same day: <a
+href="https://arxiv.org/abs/2607.24528">Nie and Wei</a> and <a
+href="https://doi.org/10.5281/zenodo.21626794">Stander</a>.</li>
+<li>Dmitry Rybin used GPT-5.6 Pro to produce an explicit counterexample
+to the cost version of the Dinitz–Garg–Goemans conjecture: the <a
+href="https://x.com/DmitryRybin1/status/2079904005652893709">announcement</a>
+and <a
+href="https://chatgpt.com/share/6a60b2eb-0b64-83ee-9c76-7931ca1de063">prompt
+transcript</a>.</li>
+<li>A team at Peking University developed Rethlas–Archon, a system
+combining natural-language proof search with Lean formalization: the <a
+href="https://arxiv.org/abs/2604.03789">paper</a>, <a
+href="https://github.com/frenzymath/Rethlas">Rethlas</a>, and the <a
+href="https://github.com/frenzymath/Rethlas_results">Rethlas
+outputs</a>.</li>
+<li>Binghui Peng, Hantao Yu, Runzhou Tao, Steven Wang, Diyi Liu, and
+others used a GPT-5.5 Pro prover–verifier pipeline on a collection of
+open mathematical problems, with Lean formalizations for some of the
+results: the <a
+href="https://github.com/Pengbinghui/pipeline-math">pipeline-math
+project</a>.</li>
 </ul>
 <h2 id="how-the-proof-was-found">How the Proof Was Found</h2>
-<p>My prompting strategy was almost embarrassingly simple: I gave the model the problem and asked it to prove or refute it. Some of the prompting in the examples above may be considerably more sophisticated.</p>
+<p>My prompting strategy was almost embarrassingly simple: I gave the
+model the problem and asked it to prove or refute it. Some of the
+prompting in the examples above may be considerably more
+sophisticated.</p>
 <p>There was, however, one intervention worth describing.</p>
-<p>GPT-5.5 Pro first identified the mainstream approach to the problem—P-stability—and tried to push that line of attack forward. It did not succeed. I knew enough about the method to suspect that P-stability alone was unlikely to resolve the general case, so partway through the process I told the model not to remain attached to the existing approach and to look instead for something more algebraic.</p>
-<p>That change of direction altered everything. From that point on, GPT worked almost autonomously and produced the proof within a few more prompting rounds.</p>
-<p>To be clear, when I suggested an algebraic approach, I did not know that it would work. If I had known, I might have solved the problem myself. I simply saw that the model was stuck and nudged it toward a different road.</p>
-<p>The human-in-the-loop contribution in this case was therefore mostly one high-level directional prompt. What I find striking is that such guidance can be effective even when the human does not know where the new direction will lead.</p>
-<p>Now that <a href="https://openai.com/index/gpt-5-6/">GPT-5.6</a> is available, a more natural workflow may be to use Sol inside Codex rather than work through the browser as I did. Codex’s <a href="https://developers.openai.com/codex/use-cases/follow-goals"><code>/goal</code></a> command may be especially useful: it can keep GPT working on a problem for dozens of hours.</p>
+<p>GPT-5.5 Pro first identified the mainstream approach to the
+problem—P-stability—and tried to push that line of attack forward. It
+did not succeed. I knew enough about the method to suspect that
+P-stability alone was unlikely to resolve the general case, so partway
+through the process I told the model not to remain attached to the
+existing approach and to look instead for something more algebraic.</p>
+<p>That change of direction altered everything. From that point on, GPT
+worked almost autonomously and produced the proof within a few more
+prompting rounds.</p>
+<p>To be clear, when I suggested an algebraic approach, I did not know
+that it would work. If I had known, I might have solved the problem
+myself. I simply saw that the model was stuck and nudged it toward a
+different road.</p>
+<p>The human-in-the-loop contribution in this case was therefore mostly
+one high-level directional prompt. What I find striking is that such
+guidance can be effective even when the human does not know where the
+new direction will lead.</p>
+<p>There is also an important caveat: current LLMs still miss many
+relevant references, even when they find the core proof idea. Human
+authors need to read the generated proof carefully, trace every
+ingredient back to the literature, and add the citations the model
+omitted. This is part of verification, not merely editorial cleanup.</p>
+<p>Now that <a href="https://openai.com/index/gpt-5-6/">GPT-5.6</a> is
+available, a more natural workflow may be to use Sol inside Codex rather
+than work through the browser as I did. Codex’s <a
+href="https://developers.openai.com/codex/use-cases/follow-goals"><code>/goal</code></a>
+command may be especially useful: it can keep GPT working on a problem
+for dozens of hours.</p>
 <h2 id="from-the-proof-to-lean">From the Proof to Lean</h2>
-<p>After my collaborators and I had checked the proof by hand, I tried asking Codex to formalize it. At that point, I had never written Lean. I did not even have Lean installed on my computer.</p>
-<p>Codex had already been enormously useful in my other projects, but asking it to write Lean began as an experiment that I did not expect to go very far.</p>
-<p>I started by setting a <code>/goal</code> and asking it to formalize only a small part of the argument. Its performance in each round was far better than I anticipated, so I gradually expanded the target until I was asking it to formalize the entire paper.</p>
-<p>The process was not completely smooth. Codex sometimes got stuck when it encountered mathematically standard facts whose details had been omitted from the paper. Its characteristic failure mode was not an obvious error. Instead, it would repeatedly prove closely related or redundant lemmas without making real progress on the main proof.</p>
-<p>When this happened, I brought in <a href="https://www.anthropic.com/claude-code">Claude Code</a>, using <a href="https://docs.anthropic.com/en/docs/about-claude/models/overview">Sonnet or Opus</a>, to audit the code. In places where I could judge the mathematics directly, I also asked GPT to write a more detailed natural-language proof first and then passed that proof to Codex. In the end, we resolved all of these issues.</p>
-<p>Once the formalization was complete, I asked Codex to carry out a thorough refactor. This reduced the codebase from roughly 100,000 lines to somewhere between 70,000 and 80,000 lines. I also ran several additional rounds of auditing to confirm that the formalized statement genuinely matched the main theorem in the paper.</p>
-<p>My estimate is that the entire process was about 95% automated. My main role was to keep Codex from becoming trapped in loops of equivalent or repetitive arguments.</p>
-<p>There is a slightly embarrassing coda: by the end of the project, I still could not write Lean myself—although I had at least learned to read a little of it.</p>
+<p>After my collaborators and I had checked the proof by hand, I tried
+asking Codex to formalize it. At that point, I had never written Lean. I
+did not even have Lean installed on my computer.</p>
+<p>Codex had already been enormously useful in my other projects, but
+asking it to write Lean began as an experiment that I did not expect to
+go very far.</p>
+<p>I started by setting a <code>/goal</code> and asking it to formalize
+only a small part of the argument. Its performance in each round was far
+better than I anticipated, so I gradually expanded the target until I
+was asking it to formalize the entire paper.</p>
+<p>The process was not completely smooth. Codex sometimes got stuck when
+it encountered mathematically standard facts whose details had been
+omitted from the paper. Its characteristic failure mode was not an
+obvious error. Instead, it would repeatedly prove closely related or
+redundant lemmas without making real progress on the main proof.</p>
+<p>When this happened, I brought in <a
+href="https://www.anthropic.com/claude-code">Claude Code</a>, using <a
+href="https://docs.anthropic.com/en/docs/about-claude/models/overview">Sonnet
+or Opus</a>, to audit the code. In places where I could judge the
+mathematics directly, I also asked GPT to write a more detailed
+natural-language proof first and then passed that proof to Codex. In the
+end, we resolved all of these issues.</p>
+<p>Once the formalization was complete, I asked Codex to carry out a
+thorough refactor. This reduced the codebase from roughly 100,000 lines
+to somewhere between 70,000 and 80,000 lines. I also ran several
+additional rounds of auditing to confirm that the formalized statement
+genuinely matched the main theorem in the paper.</p>
+<p>My estimate is that the entire process was about 95% automated. My
+main role was to keep Codex from becoming trapped in loops of equivalent
+or repetitive arguments.</p>
+<p>There is a slightly embarrassing coda: by the end of the project, I
+still could not write Lean myself—although I had at least learned to
+read a little of it.</p>
 <h2 id="faq">FAQ</h2>
-<h3 id="1-why-formalize-the-proof-in-lean">1. Why formalize the proof in Lean?</h3>
-<p>Reviewing an LLM-generated proof is fascinating, but it is also nerve-racking. A proof handed to you by a model does not feel quite like one you developed line by line yourself. Even after several rounds of checking, I sometimes worried that we might have missed a detail.</p>
-<p>Over a longer time horizon, LLMs will undoubtedly prove more theorems, including more important ones. But it will be difficult to eliminate the concern that any particular proof may contain a hidden error. As early practitioners of what one might call <em>vibe mathing</em>, I think we have a responsibility to give our colleagues a proof they can trust.</p>
-<p>Lean is not the only way to verify a proof, and its libraries are still immature in many areas of mathematics. But it is an excellent option. It allows us to redirect some of our attention from “Is this proof actually correct?” toward understanding the mathematics itself.</p>
-<h3 id="2-what-kinds-of-conjectures-can-llms-solve">2. What kinds of conjectures can LLMs solve?</h3>
+<h3 id="why-formalize-the-proof-in-lean">1. Why formalize the proof in
+Lean?</h3>
+<p>Reviewing an LLM-generated proof is fascinating, but it is also
+nerve-racking. A proof handed to you by a model does not feel quite like
+one you developed line by line yourself. Even after several rounds of
+checking, I sometimes worried that we might have missed a detail.</p>
+<p>Over a longer time horizon, LLMs will undoubtedly prove more
+theorems, including more important ones. But it will be difficult to
+eliminate the concern that any particular proof may contain a hidden
+error. As early practitioners of what one might call <em>vibe
+mathing</em>, I think we have a responsibility to give our colleagues a
+proof they can trust.</p>
+<p>Lean is not the only way to verify a proof, and its libraries are
+still immature in many areas of mathematics. But it is an excellent
+option. It allows us to redirect some of our attention from “Is this
+proof actually correct?” toward understanding the mathematics
+itself.</p>
+<h3 id="what-kinds-of-conjectures-can-llms-solve">2. What kinds of
+conjectures can LLMs solve?</h3>
 <p>I suspect: quite a lot.</p>
-<p>My current guess is that LLMs can already handle problems of roughly the following kind:</p>
+<p>My current guess is that LLMs can already handle problems of roughly
+the following kind:</p>
 <blockquote>
-<p>Nearly all the ingredients already exist, but no one has yet seen how to assemble them into a complete global proof.</p>
+<p>Nearly all the ingredients already exist, but no one has yet seen how
+to assemble them into a complete global proof.</p>
 </blockquote>
-<p>I do not think current models can solve problems that require building an entirely new theoretical framework from scratch. But they can carry out complicated calculations, produce clever ideas, and combine techniques from different areas.</p>
+<p>I do not think current models can solve problems that require
+building an entirely new theoretical framework from scratch. But they
+can carry out complicated calculations, produce clever ideas, and
+combine techniques from different areas.</p>
 <p>Which problems in your own field sit at that level?</p>
-<h3 id="3-how-many-attempts-did-this-take">3. How many attempts did this take?</h3>
-<p>This was the first mathematical conjecture I tried to solve through prompting.</p>
-<p>I only subscribed to Pro in May. I had mainly been using Codex for research related to diffusion models. In fact, I have gradually moved away from theory over the past few years, so this is definitely not a story in which I tried hundreds of problems and reported the one success.</p>
-<p>After solving this problem, I did try several others. Some were not public conjectures, but simply questions that interested me. The results were mixed.</p>
-<h3 id="4-what-might-this-mean-for-mathematics">4. What might this mean for mathematics?</h3>
-<p>In the short term, I think we are entering a “prompt era.” We will see many new advances and many new proofs, and verification may become the bottleneck that follows.</p>
-<p>The good news is obvious: important new results will be discovered. The less comfortable consequence is that LLMs may sharply compress the value of solid but non-landmark results. The same dynamic may apply to other theoretical fields, including learning theory, theoretical statistics, econometrics, and theoretical physics.</p>
-<h3 id="5-what-might-this-mean-for-mathematicians">5. What might this mean for mathematicians?</h3>
+<h3 id="how-many-attempts-did-this-take">3. How many attempts did this
+take?</h3>
+<p>This was the first mathematical conjecture I tried to solve through
+prompting.</p>
+<p>I only subscribed to Pro in May. I had mainly been using Codex for
+research related to diffusion models. In fact, I have gradually moved
+away from theory over the past few years, so this is definitely not a
+story in which I tried hundreds of problems and reported the one
+success.</p>
+<p>After solving this problem, I did try several others. Some were not
+public conjectures, but simply questions that interested me. The results
+were mixed.</p>
+<h3 id="what-might-this-mean-for-mathematics">4. What might this mean
+for mathematics?</h3>
+<p>In the short term, I think we are entering a “prompt era.” We will
+see many new advances and many new proofs, and verification may become
+the bottleneck that follows.</p>
+<p>The good news is obvious: important new results will be discovered.
+The less comfortable consequence is that LLMs may sharply compress the
+value of solid but non-landmark results. The same dynamic may apply to
+other theoretical fields, including learning theory, theoretical
+statistics, econometrics, and theoretical physics.</p>
+<h3 id="what-might-this-mean-for-mathematicians">5. What might this mean
+for mathematicians?</h3>
 <p>I do not know.</p>
-<p>For someone like me—with a mathematical background, but gradually moving into other areas—the experience has been almost perfect. It gives me an excuse to return, in spare moments, to questions that once fascinated me but that I could not solve.</p>
-<p>For people whose careers are entirely in mathematics, the experience may be much more complicated. A problem that someone has worked on for years might be solved by a model in a very short time.</p>
-<p>There is also a more constructive possibility. LLMs may let problem solvers tackle much harder problems, while theory builders may collaborate with models in a different way: using mathematical taste and high-level judgment to guide the construction of new theories.</p>
-<h3 id="6-what-are-the-main-takeaways">6. What are the main takeaways?</h3>
+<p>For someone like me—with a mathematical background, but gradually
+moving into other areas—the experience has been almost perfect. It gives
+me an excuse to return, in spare moments, to questions that once
+fascinated me but that I could not solve.</p>
+<p>For people whose careers are entirely in mathematics, the experience
+may be much more complicated. A problem that someone has worked on for
+years might be solved by a model in a very short time.</p>
+<p>There is also a more constructive possibility. LLMs may let problem
+solvers tackle much harder problems, while theory builders may
+collaborate with models in a different way: using mathematical taste and
+high-level judgment to guide the construction of new theories.</p>
+<h3 id="what-are-the-main-takeaways">6. What are the main
+takeaways?</h3>
 <p>Three conclusions stand out to me.</p>
-<p>First, LLMs are already extraordinarily capable. I have no doubt that they will change how people do mathematics.</p>
-<p>Second, Lean verification was far easier than I expected: with an LLM, you do not even need to know Lean to produce a machine-checked formalization. The code is far below mathlib standards, but can be enough to check that a theorem is <em>merely true</em>. This example may be biased, however, because Lean support remains incomplete in many fields.</p>
-<p>Third, my advice is simple: test boldly and verify rigorously. There is a Chinese saying, often quoted sarcastically, <em>人有多大胆，地有多大产</em>—roughly, “the bolder you are, the greater the harvest.” With current models, it may be unexpectedly apt. Ask them to attempt problems you would not previously have dared to try. Each attempt is also a probe: watch what the model can do, where it fails, and where human taste and judgment remain indispensable. That is how we map the boundaries of these systems.</p>
-<p><em>I’m off to diffusion models. Happy prompting! If a model surprises you, consider buying me a coffee. ☕</em></p>
+<p>First, LLMs are already extraordinarily capable. I have no doubt that
+they will change how people do mathematics.</p>
+<p>Second, Lean verification was far easier than I expected: with an
+LLM, you do not even need to know Lean to produce a machine-checked
+formalization. The code is far below mathlib standards, but can be
+enough to check that a theorem is <em>merely true</em>. This example may
+be biased, however, because Lean support remains incomplete in many
+fields.</p>
+<p>Third, my advice is simple: test boldly and verify rigorously. There
+is a Chinese saying, often quoted sarcastically,
+<em>人有多大胆，地有多大产</em>—roughly, “the bolder you are, the
+greater the harvest.” With current models, it may be unexpectedly apt.
+Ask them to attempt problems you would not previously have dared to try.
+Each attempt is also a probe: watch what the model can do, where it
+fails, and where human taste and judgment remain indispensable. That is
+how we map the boundaries of these systems.</p>
+<p>Another famous example of <em>废话文学</em> (“tautological
+literature”) says, <em>问题的关键就是抓住关键的问题</em>—“The key to the
+problem is to grasp the key problem.” It sounds like a joke, but with
+current LLMs it is becoming surprisingly accurate. Once models make many
+execution-level costs extremely low, identifying the truly key problem
+becomes a much larger part of the work.</p>
+<p><em>I’m off to diffusion models. Happy prompting! If a model
+surprises you, consider buying me a coffee. ☕</em></p>
             </div>
             <!-- Add a Cusdis or Hyvor Talk embed here after configuring the site's provider ID. -->
         </article>

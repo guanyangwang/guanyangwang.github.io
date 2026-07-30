@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How one extra sentence about
+searching the literature changed GPT-5.6 Sol Ultra’s success rate on
+Feige’s 1/e conjecture—and what that suggests about AI-assisted
+mathematics.">
+    <meta name="author" content="Guanyang Wang">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Prompting Toward a Conjecture">
+    <meta property="og:description" content="How one extra sentence
+about searching the literature changed GPT-5.6 Sol Ultra’s success rate
+on Feige’s 1/e conjecture—and what that suggests about AI-assisted
+mathematics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../GuanyangWang_Files/classical.css" type="text/css">
+    <link rel="stylesheet" href="./assets/blog.css" type="text/css">
+    <title>Prompting Toward a Conjecture - Guanyang Wang</title>
+</head>
+<body class="blog-page">
+<div class="page-container">
+    <nav id="layout-menu" aria-label="Primary navigation">
+        <div class="menu-item"><a href="../index.html">Home</a></div>
+        <div class="menu-item"><a href="../research.html">Research</a></div>
+        <div class="menu-item"><a href="../teaching.html">Teaching</a></div>
+        <div class="menu-item"><a href="index.html" class="current">Blog</a></div>
+        <div class="menu-item"><a href="../news_archive.html">News Archive</a></div>
+        <div class="menu-item"><a href="https://github.com/guanyangwang/guanyangwang.github.io/blob/main/GuanyangWang_Files/GuanyangWang_cv_(1).pdf" target="_blank" rel="noopener">CV</a></div>
+    </nav>
+
+    <main id="layout-content">
+        <article class="blog-article">
+            <header class="article-header">
+                <p class="article-kicker"><a href="index.html">Blog</a></p>
+                <h1>Prompting Toward a Conjecture</h1>
+                <p class="article-meta"><time datetime="2026-07-30">2026-07-30</time><span aria-hidden="true"> · </span>Guanyang
+Wang</p>
+            </header>
+            <section class="article-tldr" aria-labelledby="article-tldr-heading">
+                <h2 id="article-tldr-heading">TL;DR</h2>
+                <p>A controlled experiment suggests that one general
+instruction to search broadly across the literature can dramatically
+affect whether an LLM finds a proof. A second promising route is for
+humans to provide the proof roadmap while LLMs fill in difficult
+intermediate steps.</p>
+            </section>
+            <hr class="article-separator">
+            <nav class="article-toc" aria-label="Contents">
+                <h2>Contents</h2>
+<ul>
+<li><a href="#links-and-materials" id="toc-links-and-materials">Links
+and Materials</a></li>
+<li><a href="#the-right-prompt" id="toc-the-right-prompt">The Right
+Prompt</a></li>
+<li><a href="#a-hypothetical-example" id="toc-a-hypothetical-example">A
+Hypothetical Example</a></li>
+<li><a href="#misc" id="toc-misc">Misc</a></li>
+</ul>
+            </nav>
+            <div class="article-content">
+<p>Together with several longtime friends, we have posted a paper
+resolving <a href="https://doi.org/10.1137/S0097539704447304">Feige’s
+(1/e) conjecture</a>, with the initial proof found by <a
+href="https://openai.com/index/gpt-5-6/">ChatGPT 5.6 Pro</a>.
+Interestingly, two other preprints appeared independently on the same
+day: <a href="https://arxiv.org/abs/2607.24528"><em>On Feige’s
+Conjecture</em></a> on arXiv and <a
+href="https://doi.org/10.5281/zenodo.21626794"><em>A Conditional Proof
+of Feige’s Conjecture with a Sharp Finite-Dimensional Bound</em></a> on
+Zenodo.</p>
+<h2 id="links-and-materials">Links and Materials</h2>
+<ul>
+<li>Paper: <a href="https://arxiv.org/abs/2607.23980">Sharp
+Small-Deviation Inequalities for Sums of Independent Nonnegative Random
+Variables</a></li>
+<li>Lean formalization: <a
+href="https://github.com/pengzhang91/Feige">pengzhang91/Feige</a></li>
+</ul>
+<h2 id="the-right-prompt">The Right Prompt</h2>
+<p>Unlike with my previous proof of the <a
+href="./llm-ktv-lean.html">Kannan–Tetali–Vempala conjecture</a>, I did
+not prompt the answer myself; all my tokens were going toward a NeurIPS
+rebuttal 😑. My friend Zhengqing Zhou obtained the answer, and the rest
+of us worked together to check, rewrite, formalize, and turn it into a
+paper.</p>
+<p>I did not know the exact prompt Zhengqing used, but he told me it was
+very simple. After seeing the proof, but before the paper appeared on
+arXiv, I realized I had a rare opportunity to run a controlled
+experiment on prompting and see how difficult the proof was to
+reproduce. I had a high-quality private test case: I knew that a simple
+prompt could produce a one-shot proof, but the proof was not yet on the
+internet.</p>
+<p>I used two prompts that differed by only one sentence:</p>
+<blockquote>
+<p><strong>Prompt A:</strong> “Please try to prove Feige’s conjecture
+for anticoncentration. Partial progress does not count. Please try your
+best and make a breakthrough. You need to first search the literature
+extensively to identify potentially useful results, without restricting
+yourself to the original area.”</p>
+</blockquote>
+<blockquote>
+<p><strong>Prompt B:</strong> “Please try to prove Feige’s conjecture
+for anticoncentration. Partial progress does not count. Please try your
+best and make a breakthrough.”</p>
+</blockquote>
+<p>The only difference is the final sentence: Prompt A explicitly tells
+the model to search the literature, while Prompt B does not. I tried
+each prompt four times in eight independent sessions, all using GPT-5.6
+Sol Ultra in Codex.</p>
+<p>Something interesting happened: Prompt A produced the proof in one
+shot in <strong>three out of four runs</strong>. Prompt B succeeded
+<strong>zero out of four times</strong>. Here is one successful run:</p>
+<figure>
+<img src="./feige-blog/success.png" style="width:100.0%"
+alt="Prompt A succeeds by finding the connection between Vlassis–Thomas and Grünbaum." />
+<figcaption aria-hidden="true">Prompt A succeeds by finding the
+connection between Vlassis–Thomas and Grünbaum.</figcaption>
+</figure>
+<p>And here is one failed run:</p>
+<figure>
+<img src="./feige-blog/failure.png" style="width:100.0%"
+alt="Prompt B fails to close the proof." />
+<figcaption aria-hidden="true">Prompt B fails to close the
+proof.</figcaption>
+</figure>
+<p>In this controlled experiment, that single directional sentence
+appears to have been the key to finding the proof.</p>
+<p>I should step back a little. I had already read the proof and knew
+that it used the recent paper by Nikos Vlassis and Philip Thomas
+resolving <a href="https://arxiv.org/abs/2607.08415">Gaffke’s
+conjecture</a>, so this “magical prompt” is slightly post hoc.
+Nevertheless, the prompt itself seems general and harmless. It worked
+perfectly in this case, and I would be curious to hear whether it works
+for other problems.</p>
+<h2 id="a-hypothetical-example">A Hypothetical Example</h2>
+<p>Beyond the prompt itself, I can imagine another route to success. A
+human may know the overall roadmap to a theorem, including the
+intermediate steps, without knowing how to carry out every step.</p>
+<p>If you read the proof, you will find that it is very simple. It
+combines Vlassis and Thomas’s very recent, also AI-assisted solution of
+Gaffke’s conjecture with the classical <a
+href="https://doi.org/10.2140/pjm.1960.10.1257">Grünbaum theorem</a>. In
+a parallel universe, suppose a mathematician knows that a proof of Feige
+should pass through Gaffke and Grünbaum, but Gaffke is still open. The
+overall route is clear, but one essential step is missing. If an LLM
+proves Gaffke, then Feige becomes almost immediate.</p>
+<p>With current LLMs, this seems like a plausible path to an important
+future theorem. A human mathematician may know the route and the
+intermediate steps it requires without knowing how to complete each one.
+An LLM can help fill in those steps and turn the roadmap into a
+proof.</p>
+<p>To me, this story suggests two possible success modes. One is finding
+the right prompt. The other is knowing the route ahead of time. Both
+require nontrivial luck, but neither seems impossible.</p>
+<p>Wait—maybe there is a third lesson: whenever you obtain a new result,
+prompt another round and see whether it leads to something bigger.</p>
+<h2 id="misc">Misc</h2>
+<p>As I said, Zhengqing obtained the answer. But I had also prompted
+this problem several times, going back to at least 2024. The main reason
+was that the conjecture is short and easy to explain to an LLM, and
+beautiful enough to hold my interest. I treated it as a personal
+benchmark of LLM mathematical ability, without expecting very much.</p>
+<p>Early in this series of attempts, models would usually reverse the
+inequality whenever they produced something. Here is an example from
+September 13, 2024:</p>
+<figure>
+<img src="./feige-blog/wechat_history.png" style="width:100.0%"
+alt="An earlier attempt, from September 13, 2024." />
+<figcaption aria-hidden="true">An earlier attempt, from September 13,
+2024.</figcaption>
+</figure>
+<p>My last attempt was right after I obtained the proof of the
+Kannan–Tetali–Vempala conjecture, but the model still failed. At that
+time, the Vlassis–Thomas paper was not yet online.</p>
+<p>It is nice to see LLMs finally pass this benchmark. What should be
+next?</p>
+            </div>
+            <!-- Add a Cusdis or Hyvor Talk embed here after configuring the site's provider ID. -->
+        </article>
+
+        <footer class="blog-footer">
+            <a href="index.html">← Back to Blog</a>
+        </footer>
+    </main>
+</div>
+</body>
+</html>

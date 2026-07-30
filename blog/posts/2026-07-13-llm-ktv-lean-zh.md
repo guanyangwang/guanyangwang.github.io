@@ -40,6 +40,9 @@ alternate_lang: en
 - OpenAI 的内部模型推翻 Erdős unit-distance conjecture：[官方说明](https://openai.com/index/model-disproves-discrete-geometry-conjecture/)、[AI 生成的证明](https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-proof.pdf)、[数学家的说明文章](https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-remarks.pdf)、[模型推理记录的节选与重写版](https://cdn.openai.com/pdf/1625eff6-5ac1-40d8-b1db-5d5cf925de8b/unit-distance-cot.pdf)。
 - Xiao Ma 用公开版 GPT-5.5 Pro 复现 unit-distance conjecture 的反例构造 [Prompt history](https://chatgpt.com/share/6a0e9e04-8cb0-8332-a4f1-ec68acd2e03e)
 - OpenAI 发布了由 GPT-5.6 Sol Ultra 生成的 Cycle Double Cover Conjecture 证明稿：[证明稿](https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf)、[prompt](https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf)、[发布帖](https://x.com/__eknight__/status/2075643450196971805)。
+- Levent Alpöge 公布了一个三变量反例，推翻一般形式的 Jacobian conjecture，并将构造归功于 Claude Fable 5：[发布帖](https://x.com/__alpoge__/status/2079028340955197566)和[独立的 Isabelle/HOL 验证](https://isa-afp.org/entries/Jacobian_Counterexample.html)。
+- ChatGPT 5.6 Pro 找到了我们关于 sharp small-deviation inequality 的初始证明，从而解决 Feige 的 \(1/e\) 猜想：[论文](https://arxiv.org/abs/2607.23980)、[Lean 形式化](https://github.com/pengzhang91/Feige)和[博客](./feige-conjecture.html)。同一天还独立出现了另外两篇预印本：[Nie 和 Wei](https://arxiv.org/abs/2607.24528)以及 [Stander](https://doi.org/10.5281/zenodo.21626794)。
+- Dmitry Rybin 使用 GPT-5.6 Pro 构造出 Dinitz–Garg–Goemans 猜想 cost 版本的一个显式反例：[发布帖](https://x.com/DmitryRybin1/status/2079904005652893709)和 [prompt 记录](https://chatgpt.com/share/6a60b2eb-0b64-83ee-9c76-7931ca1de063)。
 - 北京大学团队提出的 Rethlas–Archon 系统，将自然语言证明搜索与 Lean 形式化结合起来：[论文](https://arxiv.org/abs/2604.03789)、[Rethlas](https://github.com/frenzymath/Rethlas)、[Rethlas 输出](https://github.com/frenzymath/Rethlas_results)。
 - Binghui Peng、Hantao Yu、Runzhou Tao、Steven Wang、Diyi Liu 等人使用 GPT-5.5 Pro 的 prover–verifier pipeline 处理一组数学 open problems，并对部分结果完成 Lean 形式化：[pipeline-math 项目](https://github.com/Pengbinghui/pipeline-math)。
 
@@ -52,6 +55,8 @@ alternate_lang: en
 事实上，这个转方向的 prompt 改变了一切。之后 GPT 基本上是全自动地，在几轮之内给出了证明。很显然，我在给出这个 prompt 时，其实并不知道代数方法会有效——不然我自己就做出来了。我只是看到它卡住了，于是让它试一条新的路线。
 
 所以，这里 human-in-the-loop 的部分，主要就是一次 high-level 的方向性 prompt。这样的引导在这个例子里显然有效，哪怕人自己也不知道新方向具体应该怎么走。
+
+这里也有一个重要的提醒：现在的 LLM 即使找到了证明的核心思路，仍然会遗漏很多相关文献。人必须仔细阅读生成的证明，把每一个 ingredient 追溯到已有工作，并补上模型遗漏的引用。这是验证过程的一部分，而不只是文字编辑。
 
 在 [GPT-5.6](https://openai.com/index/gpt-5-6/) 发布之后，也许更合适的方式是在 Codex 里使用 Sol，而不是像我一样在网页里做。Codex 的 [`/goal`](https://developers.openai.com/codex/use-cases/follow-goals) 命令可能会非常有用：它可以让GPT猛猛工作几十个小时。
 
@@ -124,5 +129,7 @@ Lean 不是唯一的验证方式，尤其是它在很多数学方向上的库还
 第二，用 Lean 验证远比我想象的容易：借助 LLM，你甚至不需要会 Lean，也能得到机器检查的形式化证明。生成的代码远达不到 mathlib 标准，但足以检验定理是否 *merely true*。不过这个例子可能有偏差，因为 Lean 对许多领域的支持仍不完善。
 
 第三，我的建议很简单：大胆测试，严谨验证。中国有句话常被用来讽刺：“人有多大胆，地有多大产。”但面对今天的模型，它也许意外地有几分道理。可以让模型尝试那些过去不敢做的问题。每一次尝试也都是一次测试：观察它能做到什么、会在哪里失败，以及哪些地方仍然离不开人的品味和判断。我们正是这样逐渐摸清这些系统的能力边界。
+
+另一句著名的“废话文学”（*tautological literature*）是：“问题的关键就是抓住关键的问题”（*The key to the problem is to grasp the key problem.*）这句话听起来像个笑话，但面对今天的 LLM，它正在变得意外地准确。当模型把许多执行层面的成本降得极低时，识别出真正关键的问题，就会成为工作中更重要的部分。
 
 *我继续研究扩散模型去了。祝大家 prompt 愉快！如果模型带来惊喜，可以考虑请我喝杯咖啡。☕*
