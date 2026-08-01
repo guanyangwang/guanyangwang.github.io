@@ -81,4 +81,6 @@ Of course, it is also possible that people in other fields who need mathematics 
 
 ## Final Thoughts
 
-I have many other thoughts, but I have decided to stop here for now. I think the different combinations you choose reflect different underlying beliefs and lead to different choices. I believe mathematicians need to adapt to a new era, but I do not quite agree with the overly anxious and pessimistic views online. To me, this still feels like a branching point in a game. It will determine whether mathematicians are heading toward dawn or twilight.
+I have many other thoughts, but I have decided to stop here for now. I think the different combinations you choose reflect different underlying beliefs and lead to different choices. I believe mathematicians need to adapt to a new era, but I do not quite agree with the overly anxious and pessimistic views online.
+
+To me, this still feels like a branching point in a game. The outcome is not entirely within our control, but we can at least place our own bets. In the end, it will determine whether mathematicians are heading toward dawn or twilight.
