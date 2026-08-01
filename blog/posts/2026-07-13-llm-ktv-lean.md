@@ -7,9 +7,6 @@ description: "How GPT-5.5 Pro generated a proof resolving the binary-matrix case
 slug: llm-ktv-lean
 toc_title: Contents
 back_label: "← Back to Blog"
-alternate_url: llm-ktv-lean-zh.html
-alternate_label: 中文
-alternate_lang: zh-CN
 ---
 
 In June 2026, I used [ChatGPT 5.5 Pro](https://openai.com/index/introducing-gpt-5-5/) to obtain a proof of the [Kannan–Tetali–Vempala (KTV) conjecture](https://dl.acm.org/doi/10.5555/314161.314256). My collaborators, Weibo Fu and Qian Qin, and I then checked it carefully. Afterward, I used [Codex](https://openai.com/codex/) to formalize the proof in [Lean](https://lean-lang.org/).
