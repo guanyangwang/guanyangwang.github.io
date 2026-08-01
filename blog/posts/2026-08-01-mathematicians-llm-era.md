@@ -20,7 +20,7 @@ I think the most important question is this:
 
 > When AI significantly accelerates the development of a field, do you expect that field to flourish or to wither?
 
-To make this more concrete, AI is currently producing far more breakthroughs in combinatorics than in analysis. If we paused AI development at this moment, which field would more people choose to enter: combinatorics or analysis?
+For a concrete example, AI is currently producing far more breakthroughs in combinatorics than in analysis. If we paused AI development at this moment, which field would more people choose to enter: combinatorics or analysis?
 
 Once you think about it, the answer is not obvious. There is a reasonable argument in either direction. That is because the answer actually depends on many additional factors. The two main ones I can think of are:
 
