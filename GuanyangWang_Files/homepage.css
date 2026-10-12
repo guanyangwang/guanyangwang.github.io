@@ -1,0 +1,215 @@
+/* Homepage-only profile layout; the shared academic stylesheet stays intact. */
+.home-page .profile-intro {
+    display: grid;
+    grid-template-columns: 175px minmax(0, 1fr) 290px;
+    align-items: center;
+    gap: 25px;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.home-page .profile-portrait {
+    display: block;
+    width: 175px;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+
+.home-page .profile-details {
+    min-width: 0;
+    font-size: 16px;
+}
+
+.home-page .profile-details p {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    line-height: 1.55;
+}
+
+.home-page .profile-details h3 {
+    margin: 18px 0 7px;
+    font-size: 16px;
+}
+
+.home-page .profile-email {
+    font-size: 15px;
+}
+
+.home-page .ink-animals {
+    --ink-color: #303638;
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    min-width: 0;
+    justify-self: end;
+}
+
+.home-page .ink-sheet {
+    appearance: none;
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.5;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink-color);
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.home-page .ink-sheet:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.home-page .ink-sheet canvas {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.home-page .ink-art,
+.home-page .ink-fallback {
+    mix-blend-mode: multiply;
+}
+
+.home-page .ink-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.home-page .ink-fallback img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.home-page .ink-animals.is-ready canvas {
+    display: block;
+}
+
+.home-page .ink-animals.is-ready .ink-fallback {
+    display: none;
+}
+
+.home-page .ink-hint {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    color: #757b80;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.home-page .ink-animals.is-ready[data-ink-phase="intro"] .ink-hint,
+.home-page .ink-animals.is-ready[data-ink-phase="idle"] .ink-sheet:focus-visible ~ .ink-hint {
+    opacity: 1;
+    transform: none;
+}
+
+.home-page .ink-animals[data-ink-phase="intro"] .ink-hint,
+.home-page .ink-animals[data-ink-phase="drawing"] .ink-hint {
+    top: 78%;
+}
+
+@media (hover: hover) {
+    .home-page .ink-animals.is-ready[data-ink-phase="idle"]:hover .ink-hint {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-page .ink-hint {
+        transition: none;
+        transform: none;
+    }
+}
+
+.home-page .home-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Below the three-column width, keep the portrait and details together. */
+@media (max-width: 940px) {
+    .home-page .profile-intro {
+        grid-template-columns: 175px minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .home-page .ink-animals {
+        grid-column: 2;
+        justify-self: start;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-page #layout-menu {
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 560px) {
+    .home-page .profile-intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        margin: 26px 0 30px;
+    }
+
+    .home-page .ink-animals {
+        grid-column: 1;
+        justify-self: center;
+        margin-top: 3px;
+    }
+
+    .home-page .profile-email {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media print {
+    .home-page .profile-intro {
+        grid-template-columns: 140px minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .home-page .profile-portrait {
+        width: 140px;
+    }
+
+    .home-page .ink-animals {
+        display: none;
+    }
+}
