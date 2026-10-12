@@ -11,10 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./GuanyangWang_Files/classical.css" type="text/css">
+    <link rel="stylesheet" href="./GuanyangWang_Files/homepage.css" type="text/css">
+    <script src="./GuanyangWang_Files/ink-animals/ink-morph-data.js" defer></script>
+    <script src="./GuanyangWang_Files/ink-animals.js" defer></script>
     
     <title>Guanyang Wang - Associate Professor of Statistics</title>
 </head>
-<body>
+<body class="home-page">
 <div class="page-container">
     <div id="layout-menu">
     <div class="menu-item"><a href="index.html" class="current">Home</a></div>
@@ -29,18 +32,29 @@
 <div id="toptitle">
 <h1>Guanyang Wang &nbsp 王冠扬</h1>
 </div>
-<table class="imgtable"><tr><td>
-<img src="./GuanyangWang_Files/GuanyangWang.png" alt="Portrait of Guanyang Wang" height="270px" /></td>
-<td align="left"><p> Guanyang Wang  <br />
-<a href="https://statistics.rutgers.edu/people-pages/faculty/people/130-faculty/572-guanyang-wang"> Associate Professor</a> <br />
-<a href="https://statistics.rutgers.edu">Department of Statistics</a> <br />
-<a href="https://rutgers.edu">Rutgers University, New Brunswick</a> <br />
-<h3>Contact</h3>
-<p>Office 453, Hill Center<br />
-110 Frelinghuysen Road<br />
-Piscataway, NJ 08854<br />
-Email: guanyang.wang [at] rutgers [dot] edu</p>
-</td></tr></table>
+<section class="profile-intro" aria-label="Profile and contact information">
+    <img class="profile-portrait" src="./GuanyangWang_Files/GuanyangWang.png" alt="Portrait of Guanyang Wang" width="720" height="945" />
+    <div class="profile-details">
+        <p class="profile-affiliation">Guanyang Wang<br />
+        <a href="https://statistics.rutgers.edu/people-pages/faculty/people/130-faculty/572-guanyang-wang">Associate Professor</a><br />
+        <a href="https://statistics.rutgers.edu">Department of Statistics</a><br />
+        <a href="https://rutgers.edu">Rutgers University, New Brunswick</a></p>
+        <h3>Contact</h3>
+        <p class="profile-contact">Office 453, Hill Center<br />
+        110 Frelinghuysen Road<br />
+        Piscataway, NJ 08854<br />
+        <span class="profile-email">Email: guanyang.wang [at] rutgers [dot] edu</span></p>
+    </div>
+    <div id="ink-animals" class="ink-animals">
+        <button class="ink-sheet" type="button" disabled aria-label="Diffusion model. Click to reveal a pair of ink animals." aria-describedby="ink-instructions">
+            <span class="ink-fallback" aria-hidden="true"><img src="./GuanyangWang_Files/ink-animals/wordmark-lettering.svg" alt="" width="768" height="512" /></span>
+            <canvas class="ink-art" aria-hidden="true"></canvas>
+        </button>
+        <span class="ink-hint" aria-hidden="true">Click</span>
+        <span id="ink-instructions" class="home-sr-only">Click once, or press Enter or Space, to reshape the ink into a pair of animals. Click again to reshape them into another pair.</span>
+        <span class="ink-status home-sr-only" aria-live="polite" aria-atomic="true"></span>
+    </div>
+</section>
 <h2>About me</h2>
 <p>Welcome! I am an associate professor in the Department of Statistics at <a href="https://rutgers.edu">Rutgers University, New Brunswick</a>.</p>
 
